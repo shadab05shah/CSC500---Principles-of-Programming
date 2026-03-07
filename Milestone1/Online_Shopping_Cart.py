@@ -21,7 +21,7 @@ class ItemToPurchase:
         print(f"\n{self.itemName} {self.itemQuantity} @ ${self.itemPrice} = ${total_item_cost}")
 
 # Function to Validate the Purchased Item Name
-def get_valid_item_name(existing_items):
+def get_valid_item_name(duplicate_items):
     while True:
         item_name = input("Enter Purchased Item Name: \n").strip()
 
@@ -38,11 +38,11 @@ def get_valid_item_name(existing_items):
             print("Warning!! Item Name cannot contains Special Characters.\n")
 
         # Validation to check if the Item Name already Exists
-        elif item_name.lower() in existing_items:
+        elif item_name.lower() in duplicate_items:
             print("Warning!! Item name already exists.\n")
 
         else:
-            existing_items.add(item_name.lower())
+            duplicate_items.add(item_name.lower())
             return item_name
 
 # Function to Validate the Purchased Item Quantity
@@ -126,11 +126,11 @@ def get_number_of_items():
             print("Warning!! Purchased Number of Items must be an integer.\n")
 
 # Function to Get Item Details
-def get_item_details(item_number, existing_items):
+def get_item_details(item_number, duplicate_items):
 
     print(f"\nItem {item_number} \n")
 
-    name = get_valid_item_name(existing_items)
+    name = get_valid_item_name(duplicate_items)
     quantity = get_valid_item_quantity()
     price = get_valid_item_price()
 
@@ -139,12 +139,12 @@ def get_item_details(item_number, existing_items):
 # Main Function
 def main():
     items = []
-    existing_items = set()
+    duplicate_items = set()
 
     number_of_items = get_number_of_items()
 
     for i in range(1, number_of_items + 1):
-        item = get_item_details(i, existing_items)
+        item = get_item_details(i, duplicate_items)
         items.append(item)
 
     print("\n************ TOTAL COST ************\n")
